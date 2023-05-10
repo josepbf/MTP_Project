@@ -80,7 +80,7 @@ def upload_to_usb(filename):
   #shutil.copy("/home/rpi/textfile/output.txt", "/media/rpi/USB/output.txt")
   name = name.replace('\0','')
   print(name)
-  shutil.copy("/home/rpi/textfile/output.txt", "/media/rpi/USB/"+name)
+  shutil.copy("/home/rpi/textfile/file.txt", "/media/rpi/USB/"+name)
   print("Uploaded successfully")
 
 def write(byte_txt):
