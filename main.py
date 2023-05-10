@@ -5,11 +5,11 @@ from time import sleep
 import os
 import signal
 
-def handler(signum, frame):
-    print("STOP")
-    raise Exception("STOP")
+#def handler(signum, frame):
+ #   print("STOP")
+  #  raise Exception("STOP")
 
-signal.signal(signal.SIGALRM, handler)
+#signal.signal(signal.SIGALRM, handler)
 
 radio = RF24(22, 0)
 filename = ''
@@ -78,21 +78,21 @@ def active():
             led_manager(L1,On)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==False): #Individual Mode Rx
             led_manager(L1,Off)
-            signal.alarm(10)
-            try:
+            #signal.alarm(10)
+            #try:
                 rx_mode()
-                signal.alarm(0)
-            except Exception as exc:
-                print(exc)
+                #signal.alarm(0)
+            #except Exception as exc:
+                #print(exc)
             led_manager(L1,On)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==True): #Individual Mode Tx
             led_manager(L1,Off)
-            signal.alarm(10)
-            try:
+            #signal.alarm(10)
+            #try:
                 tx_mode(filename, compressed_bytes_batches)
-                signal.alarm(0)
-            except Exception as exc:
-                print(exc)
+                #signal.alarm(0)
+            #except Exception as exc:
+                #print(exc)
             led_manager(L1,On)
         elif (GPIO.input(SW7)==True):
             os.system('sudo reboot')
