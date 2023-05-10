@@ -81,7 +81,8 @@ def active():
             signal.alarm(10)
             try:
                 rx_mode()
-            except Exception, exc:
+                signal.alarm(0)
+            except Exception as exc:
                 print(exc)
             led_manager(L1,On)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==True): #Individual Mode Tx
@@ -89,7 +90,8 @@ def active():
             signal.alarm(10)
             try:
                 tx_mode(filename, compressed_bytes_batches)
-            except Exception, exc:
+                signal.alarm(0)
+            except Exception as exc:
                 print(exc)
             led_manager(L1,On)
         elif (GPIO.input(SW7)==True):
