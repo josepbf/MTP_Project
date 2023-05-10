@@ -152,7 +152,7 @@ def tx_mode(filename, compressed_bytes_batches):
     sleep(0.1)
     
     #bytes_to_tx = len(compressed_bytes_batches).to_bytes(31, byteorder='big')
-    bytes_to_tx = bytes(len(compressed_bytes_batches), 'utf-16-le')
+    bytes_to_tx = frament_the_text(bytes(str(len(compressed_bytes_batches)), 'utf-16-le'))
     tx(bytes_to_tx)
     sleep(0.1)
     
