@@ -3,6 +3,7 @@ from functions import *
 from pyrf24 import RF24
 from time import sleep
 import os
+from networkLib import*
 
 radio = RF24(22, 0)
 filename = ''
@@ -64,7 +65,8 @@ def active():
             led_manager(L1,Off)
             write_usb()
             led_manager(L1,On)
-        elif (GPIO.input(SW4)==True and GPIO.input(SW2)==True): #Nerwork Mode
+        #elif (GPIO.input(SW4)==True and GPIO.input(SW2)==True): #Nerwork Mode
+        elif (GPIO.input(SW2)==True): #NM
             led_manager(L1,Off)
             #pensar interruptor primer transmisor
             network_mode()
@@ -128,7 +130,10 @@ def network_mode():
     led_manager(L3,On)
     led_manager(L5,On)
     #AQUI cridar les funcions necesaries per a executar el network mode
-    
+    elif (GPIO.input(SW3)==True and GPIO.input(SW4)==True): #NM
+        transmitter()#NM
+    else:#NM
+        receiver()#NM
     led_manager(L2,On)
     while (GPIO.input(SW4)==True):
         sleep(0.2)
