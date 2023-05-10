@@ -198,6 +198,9 @@ def rx_mode():
 
     reception = rx()
     if(GPIO.input(SW4)==False):
+          radioPowerOff()
+          led_manager(L2,Off)
+          led_manager(L3,Off)
           return
     number_of_fragments = int.from_bytes(reception[1], byteorder='big')
     sleep(0.1)
