@@ -190,7 +190,7 @@ def rx_mode():
     print(filename_bytes)
     sleep(0.1)
     
-    number_of_fragments = int.from_bytes(rx())
+    number_of_fragments = rx().from_bytes(8, byteorder='big')
     sleep(0.1)
     
     for i in range(number_of_fragments):
