@@ -159,6 +159,8 @@ def tx_mode(filename, compressed_bytes_batches):
     for compressed_bytes_batch in compressed_bytes_batches:
         payload = fragment_batches_into_packets(compressed_bytes_batch)
         ok = tx(payload)
+        if (GPIO.input(SW4)==False):
+            break
         #encendre leds en funció del valor de "ok"
         if ok:
             print("OK")
