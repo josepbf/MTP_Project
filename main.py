@@ -205,6 +205,8 @@ def rx_mode():
     for i in range(number_of_fragments):
         reception = rx()
         #encendre leds en funció del valor de "reception[0]"
+        if(GPIO.input(SW4)==False):
+          break
         if reception[0]:
             print("OK")
             #encendre un led
@@ -212,8 +214,6 @@ def rx_mode():
             print("NOT OK")
             #encendre un altre led
         write(reception[1])
-        if(GPIO.input(SW4)==False):
-          break
         sleep(0.1)
     led_manager(L2,On)    
     
