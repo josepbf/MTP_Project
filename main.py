@@ -178,8 +178,8 @@ def tx_mode(filename, compressed_bytes_batches):
         led_manager(L2,On)
         signal.alarm(0)
         
-    except Exception as exc:
-        print(exc)
+    except:
+        continue
       
     radioPowerOff()
     
@@ -225,8 +225,8 @@ def rx_mode():
         led_manager(L2,On)
         signal.alarm(0)
         
-    except Exception as exc:
-        print(exc)
+    except:
+        continue
     
     radioPowerOff()
     
