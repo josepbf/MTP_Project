@@ -3,13 +3,6 @@ from functions import *
 from pyrf24 import RF24
 from time import sleep
 import os
-import signal
-
-def handler(signum, frame):
-    print("STOP")
-    raise Exception("STOP")
-
-#signal.signal(signal.SIGALRM, handler)
 
 radio = RF24(22, 0)
 filename = ''
@@ -151,35 +144,31 @@ def tx_mode(filename, compressed_bytes_batches):
 
     #if not radio.begin():
     #    raise OSError("nRF24L01 hardware isn't responding")
-    signal.alarm(10)
-    try:
     #radio_setup(12345, False)
-        radioSetupTX()
+    radioSetupTX()
 
-        tx(frament_the_text(bytes(filename,'utf-16-le')))
-        sleep(0.1)
+    tx(frament_the_text(bytes(filename,'utf-16-le')))
+    sleep(0.1)
 
-        bytes_to_tx = frament_the_text(len(compressed_bytes_batches).to_bytes(31, byteorder='big'))
+    bytes_to_tx = frament_the_text(len(compressed_bytes_batches).to_bytes(31, byteorder='big'))
 
-        #bytes_to_tx = frament_the_text(bytes(str(len(compressed_bytes_batches)), 'utf-16-le'))
-        tx(bytes_to_tx)
-        sleep(0.1)
+    #bytes_to_tx = frament_the_text(bytes(str(len(compressed_bytes_batches)), 'utf-16-le'))
+    tx(bytes_to_tx)
+    sleep(0.1)
 
-        for compressed_bytes_batch in compressed_bytes_batches:
-            payload = fragment_batches_into_packets(compressed_bytes_batch)
-            ok = tx(payload)
-            #encendre leds en funció del valor de "ok"
-            if ok:
-                print("OK")
-        #        #encendre un led
-            elif not ok:
-                print("NOT OK")
-        #        #encendre un altre led
-        led_manager(L2,On)
-        signal.alarm(0)
+    for compressed_bytes_batch in compressed_bytes_batches:
+        payload = fragment_batches_into_packets(compressed_bytes_batch)
+        ok = tx(payload)
+        #encendre leds en funció del valor de "ok"
+        if ok:
+            print("OK")
+    #        #encendre un led
+        elif not ok:
+            print("NOT OK")
+    #        #encendre un altre led
+    led_manager(L2,On)
+
         
-    except:
-        break
       
     radioPowerOff()
     
@@ -198,35 +187,29 @@ def rx_mode():
 
     #if not radio.begin():
     #    raise OSError("nRF24L01 hardware isn't responding")
-    signal.alarm(10)
-    try:
     #radio_setup(12345, True)
-        radioSetupRX()
+    radioSetupRX()
 
-        filename_bytes = rx()
-        print(filename_bytes)
-        sleep(0.1)
+    filename_bytes = rx()
+    print(filename_bytes)
+    sleep(0.1)
 
+    reception = rx()
+    number_of_fragments = int.from_bytes(reception[1], byteorder='big')
+    sleep(0.1)
+
+    for i in range(number_of_fragments):
         reception = rx()
-        number_of_fragments = int.from_bytes(reception[1], byteorder='big')
+        #encendre leds en funció del valor de "reception[0]"
+        if reception[0]:
+            print("OK")
+            #encendre un led
+        elif not reception[0]:
+            print("NOT OK")
+            #encendre un altre led
+        write(reception[1])
         sleep(0.1)
-
-        for i in range(number_of_fragments):
-            reception = rx()
-            #encendre leds en funció del valor de "reception[0]"
-            if reception[0]:
-                print("OK")
-                #encendre un led
-            elif not reception[0]:
-                print("NOT OK")
-                #encendre un altre led
-            write(reception[1])
-            sleep(0.1)
-        led_manager(L2,On)
-        signal.alarm(0)
-        
-    except:
-        break
+    led_manager(L2,On)    
     
     radioPowerOff()
     
