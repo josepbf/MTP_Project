@@ -147,7 +147,7 @@ def download_from_usb():
   filename = file.split("/")[-1]
   print(filename)
   print("Downloaded successfully")
-  compressed_bytes_batches = fragment_and_compress(open_txt(), 1000) # compress every 1000 batches
+  compressed_bytes_batches = fragment_and_compress(open_txt(), 100000) # compress every 1000 batches
   print("Compression successfully")
   return filename, compressed_bytes_batches
   
