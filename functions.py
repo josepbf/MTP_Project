@@ -58,7 +58,7 @@ def rx():
   byte_txt = bytes('', 'utf-16-le')
   try:
     while not eof :
-        if(GPIO.input(SW4)==False)
+        if(GPIO.input(SW4)==False):
           return
         if radio.available():
             buffer = radio.read()
@@ -120,7 +120,7 @@ def tx(payload):
         ok = radio.write(message)
         total_packets_sent += 1
         #print(f"Sending {total_packets_sent}...", ("ok" if ok else "failed"))
-        if(GPIO.input(SW4)==False)
+        if(GPIO.input(SW4)==False):
           return
         if not ok:
           packets_sent_failed += 1
