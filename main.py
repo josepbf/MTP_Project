@@ -179,7 +179,7 @@ def tx_mode(filename, compressed_bytes_batches):
         signal.alarm(0)
         
     except:
-        continue
+        break
       
     radioPowerOff()
     
@@ -226,7 +226,7 @@ def rx_mode():
         signal.alarm(0)
         
     except:
-        continue
+        break
     
     radioPowerOff()
     
