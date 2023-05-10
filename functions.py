@@ -113,6 +113,11 @@ def tx(payload):
   seq_num = 0x00
   try:
     for i in range(len(payload)):
+      if(i%60==0):
+        led_manager(L3,On)
+      elif(i%30==0):
+        led_manager(L3,Off)
+      
       message = struct.pack("<B31s",seq_num,payload[i])
       ok = False
       #Infinite retries
