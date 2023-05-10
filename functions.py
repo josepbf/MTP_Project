@@ -175,11 +175,11 @@ def frament_the_text(text):
     payload.append(text[i:i+31])
   return payload
 
-def fragment_batches_into_packets(batches):
+def fragment_batches_into_packets(batch):
   payload = list()
-  all_bytes = b''.join(batches)
-  for i in range(0,len(all_bytes), 31):
-    payload.append(all_bytes[i:i+31])
+  #all_bytes = b''.join(batches)
+  for i in range(0,len(batch), 31):
+    payload.append(batch[i:i+31])
   print("Number of packets: " + str(len(payload)))
   return payload
 
