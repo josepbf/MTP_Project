@@ -8,14 +8,14 @@ NODE_B2 = b'91684'
 NODE_C1 = b'81629'
 NODE_C2 = b'63926'
 
-OWN_ADDRESS = NODE_A1 #TODO Change to each address of each team TR
+OWN_ADDRESS = NODE_C1 #TODO Change to each address of each team TR
 
 #Filename TODO: Change for each team
 FILENAME = 'transmittedFile.txt' 
 
 def initializeRadio():
     radio = RF24()
-    if not radio.begin(4,0): #TODO: Here the 1st pin cahnegs for each team
+    if not radio.begin(22,0): #TODO: Here the 1st pin cahnegs for each team
         raise OSError("nRF24L01 hardware isn't responding")
     return radio
 
