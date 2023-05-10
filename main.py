@@ -151,7 +151,8 @@ def tx_mode(filename, compressed_bytes_batches):
     tx(frament_the_text(bytes(filename,'utf-16-le')))
     sleep(0.1)
     
-    tx(int.to_bytes(len(compressed_bytes_batches)))
+    bytes_to_tx = len(compressed_bytes_batches).to_bytes(8)
+    tx(bytes_to_tx)
     sleep(0.1)
     
     for compressed_bytes_batch in compressed_bytes_batches:
