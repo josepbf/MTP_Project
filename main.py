@@ -157,8 +157,6 @@ def tx_mode(filename, compressed_bytes_batches):
     sleep(0.1)
     
     for compressed_bytes_batch in compressed_bytes_batches:
-        print('compressed_bytes_batch')
-        print(compressed_bytes_batch)
         payload = fragment_batches_into_packets(compressed_bytes_batch)
         ok = tx(payload)
         #encendre leds en funció del valor de "ok"
