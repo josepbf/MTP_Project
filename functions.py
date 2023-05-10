@@ -5,10 +5,18 @@ import bz2
 import struct
 from pyrf24 import RF24, rf24
 import shutil
+import RPi.GPIO as GPIO #importem la llibreria correpsonent
+
 
 EOF = b'\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF' 
 EOF1 = (0, b'\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF')
 EOF2 = (1, b'\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF')
+
+
+GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
+SW4=21 #Stop/Go
+GPIO.setup(SW4, GPIO.IN)
+
 
 #radio setup
 #mode = False for TX or True for RX
@@ -49,7 +57,9 @@ def rx():
   received_packets = 0
   byte_txt = bytes('', 'utf-16-le')
   try:
-    while not eof:
+    while not eof :
+        if(GPIO.input(SW4)==False)
+          return
         if radio.available():
             buffer = radio.read()
             fragment = struct.unpack("<B31s",buffer)
@@ -110,6 +120,8 @@ def tx(payload):
         ok = radio.write(message)
         total_packets_sent += 1
         #print(f"Sending {total_packets_sent}...", ("ok" if ok else "failed"))
+        if(GPIO.input(SW4)==False)
+          return
         if not ok:
           packets_sent_failed += 1
       packets_sent_ok += 1
