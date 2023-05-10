@@ -8,7 +8,7 @@ logging.basicConfig(format='%(asctime)s %(levelname)s:%(funcName)s:%(message)s',
                     level=logging.DEBUG)
 
 #Array of link addresses (5 bytes each)
-LINK_ADDRESSES = [b'NodeA1', b'NodeA2', b'NodeB1', b'NodeB2', b'NodeC1', b'NodeC2']
+LINK_ADDRESSES = [NODE_A1, NODE_A2, NODE_B1, NODE_B2, NODE_C1, NODE_C2]
 
 LINK_ADDRESSES.remove(OWN_ADDRESS) 
 
@@ -96,6 +96,8 @@ def sendStatus(radio):
         response = False
         timed_out = False
         start_time = time.time()
+        radio.flush_tx()
+        radio.flush_rx()
         while not response and not timed_out:
             response = radio.write(HEADER_STATUS+OWN_ADDRESS)
             timed_out = (time.time() - start_time > TIMEOUT_STATUS)
@@ -167,8 +169,12 @@ def sendFile(radio,filename):
             
             if not timed_out:
                 end_packet = HEADER_FILE_PACKET + packet_id + EOT_BYTES
-                while (not radio.write(end_packet) and not timed_out):
-                    timed_out = (time.time() - start_time > TIMEOUT_FILE)            
+                response = False
+                while (not response and not timed_out):
+                    response = radio.write(end_packet)
+                    timed_out = (time.time() - start_time > TIMEOUT_FILE)
+                if response:
+                    tb.loc[index, ['File']] = 1            
     
     logging.debug('timed_out:'+str(timed_out))
 
@@ -198,7 +204,8 @@ def sendToken(radio):
                     token_passed = radio.write(TOKEN_PACKET)
                     timed_out = (time.time() - start_time > TIMEOUT_TOKEN)
                 if token_passed:
-                    tb.loc[index,'Token'] = 1
+                    #tb.loc[index,'Token'] = 1
+                    new_row['Token'] = 1
                     tb = tb.drop(index)
                     tb = pd.concat([tb, pd.DataFrame(new_row, index=[0])], ignore_index=True)
                     break
@@ -294,6 +301,7 @@ def receiveFile(radio, first_message):
     Loop to receive file until an end of transmission is received (or timeout)
     Save the file to USB
     """
+    global file
     last_packet_id = b'\xFF'
     transmission_end = False
     message_list = [first_message[2:]]
@@ -329,7 +337,6 @@ def receiveToken(radio):
     Update token variable
     Then start transmitting mode (send status,...)
     """
-    #token = 1
     del radio
     time.sleep(0.5)
     logging.debug('Token received')
