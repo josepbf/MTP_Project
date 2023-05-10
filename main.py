@@ -3,6 +3,13 @@ from functions import *
 from pyrf24 import RF24
 from time import sleep
 import os
+import signal
+
+def handler(signum, frame):
+    print("STOP")
+    raise Exception("STOP")
+
+signal.signal(signal.SIGALRM, handler)
 
 radio = RF24(22, 0)
 filename = ''
@@ -71,11 +78,19 @@ def active():
             led_manager(L1,On)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==False): #Individual Mode Rx
             led_manager(L1,Off)
-            rx_mode()
+            signal.alarm(10)
+            try:
+                rx_mode()
+            except Exception, exc:
+                print(exc)
             led_manager(L1,On)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==True): #Individual Mode Tx
             led_manager(L1,Off)
-            tx_mode(filename, compressed_bytes_batches)
+            signal.alarm(10)
+            try:
+                tx_mode(filename, compressed_bytes_batches)
+            except Exception, exc:
+                print(exc)
             led_manager(L1,On)
         elif (GPIO.input(SW7)==True):
             os.system('sudo reboot')
