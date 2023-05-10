@@ -5,9 +5,9 @@ from time import sleep
 import os
 import signal
 
-#def handler(signum, frame):
- #   print("STOP")
-  #  raise Exception("STOP")
+def handler(signum, frame):
+    print("STOP")
+    raise Exception("STOP")
 
 #signal.signal(signal.SIGALRM, handler)
 
@@ -78,21 +78,11 @@ def active():
             led_manager(L1,On)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==False): #Individual Mode Rx
             led_manager(L1,Off)
-            #signal.alarm(10)
-            #try:
             rx_mode()
-                #signal.alarm(0)
-            #except Exception as exc:
-                #print(exc)
             led_manager(L1,On)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==True): #Individual Mode Tx
             led_manager(L1,Off)
-            #signal.alarm(10)
-            #try:
             tx_mode(filename, compressed_bytes_batches)
-                #signal.alarm(0)
-            #except Exception as exc:
-                #print(exc)
             led_manager(L1,On)
         elif (GPIO.input(SW7)==True):
             os.system('sudo reboot')
@@ -161,32 +151,38 @@ def tx_mode(filename, compressed_bytes_batches):
 
     #if not radio.begin():
     #    raise OSError("nRF24L01 hardware isn't responding")
-
+    signal.alarm(10)
+    try:
     #radio_setup(12345, False)
-    radioSetupTX()
-    
-    tx(frament_the_text(bytes(filename,'utf-16-le')))
-    sleep(0.1)
-    
-    bytes_to_tx = frament_the_text(len(compressed_bytes_batches).to_bytes(31, byteorder='big'))
-    
-    #bytes_to_tx = frament_the_text(bytes(str(len(compressed_bytes_batches)), 'utf-16-le'))
-    tx(bytes_to_tx)
-    sleep(0.1)
-    
-    for compressed_bytes_batch in compressed_bytes_batches:
-        payload = fragment_batches_into_packets(compressed_bytes_batch)
-        ok = tx(payload)
-        #encendre leds en funció del valor de "ok"
-        if ok:
-            print("OK")
-    #        #encendre un led
-        elif not ok:
-            print("NOT OK")
-    #        #encendre un altre led
+        radioSetupTX()
 
+        tx(frament_the_text(bytes(filename,'utf-16-le')))
+        sleep(0.1)
+
+        bytes_to_tx = frament_the_text(len(compressed_bytes_batches).to_bytes(31, byteorder='big'))
+
+        #bytes_to_tx = frament_the_text(bytes(str(len(compressed_bytes_batches)), 'utf-16-le'))
+        tx(bytes_to_tx)
+        sleep(0.1)
+
+        for compressed_bytes_batch in compressed_bytes_batches:
+            payload = fragment_batches_into_packets(compressed_bytes_batch)
+            ok = tx(payload)
+            #encendre leds en funció del valor de "ok"
+            if ok:
+                print("OK")
+        #        #encendre un led
+            elif not ok:
+                print("NOT OK")
+        #        #encendre un altre led
+        led_manager(L2,On)
+        signal.alarm(0)
+        
+    except Exception as exc:
+        print(exc)
+      
     radioPowerOff()
-    led_manager(L2,On)
+    
     while (GPIO.input(SW4)==True):
         sleep(0.2)
         continue
@@ -202,32 +198,38 @@ def rx_mode():
 
     #if not radio.begin():
     #    raise OSError("nRF24L01 hardware isn't responding")
-
+    signal.alarm(10)
+    try:
     #radio_setup(12345, True)
-    radioSetupRX()
-    
-    filename_bytes = rx()
-    print(filename_bytes)
-    sleep(0.1)
-    
-    reception = rx()
-    number_of_fragments = int.from_bytes(reception[1], byteorder='big')
-    sleep(0.1)
-    
-    for i in range(number_of_fragments):
-        reception = rx()
-        #encendre leds en funció del valor de "reception[0]"
-        if reception[0]:
-            print("OK")
-            #encendre un led
-        elif not reception[0]:
-            print("NOT OK")
-            #encendre un altre led
-        write(reception[1])
+        radioSetupRX()
+
+        filename_bytes = rx()
+        print(filename_bytes)
         sleep(0.1)
 
+        reception = rx()
+        number_of_fragments = int.from_bytes(reception[1], byteorder='big')
+        sleep(0.1)
+
+        for i in range(number_of_fragments):
+            reception = rx()
+            #encendre leds en funció del valor de "reception[0]"
+            if reception[0]:
+                print("OK")
+                #encendre un led
+            elif not reception[0]:
+                print("NOT OK")
+                #encendre un altre led
+            write(reception[1])
+            sleep(0.1)
+        led_manager(L2,On)
+        signal.alarm(0)
+        
+    except Exception as exc:
+        print(exc)
+    
     radioPowerOff()
-    led_manager(L2,On)
+    
     while (GPIO.input(SW4)==True):
         sleep(0.2)
         continue
