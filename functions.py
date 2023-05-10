@@ -15,7 +15,11 @@ EOF2 = (1, b'\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xF
 
 GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
 SW4=21 #Stop/Go
+L3=27  #GREEN, tx if L2 & L3 NM
 GPIO.setup(SW4, GPIO.IN)
+GPIO.setup(L3, GPIO.OUT)
+On=True
+Off=False
 
 
 #radio setup
