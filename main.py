@@ -151,8 +151,9 @@ def tx_mode(filename, compressed_bytes_batches):
     tx(frament_the_text(bytes(filename,'utf-16-le')))
     sleep(0.1)
     
-    #bytes_to_tx = len(compressed_bytes_batches).to_bytes(31, byteorder='big')
-    bytes_to_tx = frament_the_text(bytes(str(len(compressed_bytes_batches)), 'utf-16-le'))
+    bytes_to_tx = frament_the_text(len(compressed_bytes_batches).to_bytes(31, byteorder='big'))
+    
+    #bytes_to_tx = frament_the_text(bytes(str(len(compressed_bytes_batches)), 'utf-16-le'))
     tx(bytes_to_tx)
     sleep(0.1)
     
@@ -191,7 +192,8 @@ def rx_mode():
     print(filename_bytes)
     sleep(0.1)
     
-    number_of_fragments = rx().from_bytes(31, byteorder='big')
+    reception = rx()
+    number_of_fragments = int.from_bytes(reception[1], byteorder='big')
     sleep(0.1)
     
     for i in range(number_of_fragments):
