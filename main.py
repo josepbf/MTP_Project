@@ -178,6 +178,7 @@ def tx_mode(filename, compressed_bytes_batches):
         
 def rx_mode(): 
     global filename_bytes
+    os.system('sudo rm /home/rpi/textfile/file.txt')
     led_manager(L3,On)
     #AQUI cridar les funcions necesaries per a executar el rx mode
     #radio = RF24(22, 0)
