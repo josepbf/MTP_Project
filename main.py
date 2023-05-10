@@ -80,7 +80,7 @@ def active():
             led_manager(L1,Off)
             #signal.alarm(10)
             #try:
-                rx_mode()
+            rx_mode()
                 #signal.alarm(0)
             #except Exception as exc:
                 #print(exc)
@@ -89,7 +89,7 @@ def active():
             led_manager(L1,Off)
             #signal.alarm(10)
             #try:
-                tx_mode(filename, compressed_bytes_batches)
+            tx_mode(filename, compressed_bytes_batches)
                 #signal.alarm(0)
             #except Exception as exc:
                 #print(exc)
