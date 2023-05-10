@@ -195,11 +195,15 @@ def rx_mode():
     sleep(0.1)
 
     reception = rx()
+    if(GPIO.input(SW4)==False):
+          return
     number_of_fragments = int.from_bytes(reception[1], byteorder='big')
     sleep(0.1)
 
     for i in range(number_of_fragments):
         reception = rx()
+        if(GPIO.input(SW4)==False):
+          return
         #encendre leds en funció del valor de "reception[0]"
         if reception[0]:
             print("OK")
