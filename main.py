@@ -65,7 +65,6 @@ def active():
             led_manager(L1,Off)
             write_usb()
             led_manager(L1,On)
-        #elif (GPIO.input(SW4)==True and GPIO.input(SW2)==True): #Nerwork Mode
         elif (GPIO.input(SW2)==True and GPIO.input(SW3)==True and GPIO.input(SW4)==True): #NM Transmitter
             led_manager(L1,Off)
             transmitter()
