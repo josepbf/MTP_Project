@@ -224,8 +224,6 @@ def fragment_and_compress(data: bytes, chunk_size: int) -> list:
 def decompress(compressed_txt):
     return bz2.decompress(compressed_txt)
 
-#TO DO: read pins
-
 #funcions per a detectar el path fins el directori del pendrive
 def get_usb_devices():
     sdb_devices = map(os.path.realpath, glob('/sys/block/sd*'))
