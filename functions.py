@@ -63,6 +63,10 @@ def rx():
   byte_txt = bytes('', 'utf-16-le')
   try:
     while not eof :
+        if(received_packets%60==0):
+          led_manager(L3,On)
+        elif(received_packets%30==0):
+          led_manager(L3,Off)
         if(GPIO.input(SW4)==False):
           return
         if radio.available():
