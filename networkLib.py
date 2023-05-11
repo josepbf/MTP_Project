@@ -157,7 +157,7 @@ def sendFile(radio,filename):
     global tb
 
     logging.info("Going to send the file to the nodes that don't have it yet.")
-    file = readFile(filename)
+    file = readFile()
     timed_out = False
     for index, row in tb.iterrows():
         if row['File'] == 0:
