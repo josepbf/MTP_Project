@@ -89,11 +89,11 @@ def read_usb():
     led_manager(L4,On)
     if os.path.exists('/dev/sda1'):
         os.system('sudo mount /dev/sda1 /media/rpi/USB')
-    elif os.path.exists('/dev/sdb1'):
+    if os.path.exists('/dev/sdb1'):
         os.system('sudo mount /dev/sdb1 /media/rpi/USB')
-    elif os.path.exists('/dev/sdc1'):
+    if os.path.exists('/dev/sdc1'):
         os.system('sudo mount /dev/sdc1 /media/rpi/USB')
-    elif os.path.exists('/dev/sdd1'):
+    if os.path.exists('/dev/sdd1'):
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     filename, compressed_bytes_batches = download_from_usb()
     led_manager(L2,On)
@@ -110,11 +110,11 @@ def write_usb():
     led_manager(L4,On)
     if os.path.exists('/dev/sda1'):
         os.system('sudo mount /dev/sda1 /media/rpi/USB')
-    elif os.path.exists('/dev/sdb1'):
+    if os.path.exists('/dev/sdb1'):
         os.system('sudo mount /dev/sdb1 /media/rpi/USB')
-    elif os.path.exists('/dev/sdc1'):
+    if os.path.exists('/dev/sdc1'):
         os.system('sudo mount /dev/sdc1 /media/rpi/USB')
-    elif os.path.exists('/dev/sdd1'):
+    if os.path.exists('/dev/sdd1'):
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     #AQUI cridar les funcions necesaries per a escriure al usb
     print(filename_bytes)
