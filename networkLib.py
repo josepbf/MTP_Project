@@ -69,9 +69,9 @@ def transmitter():
 
     sendStatus(radio)
 
-    #filename = readFile()
+    filename = readFile()
     
-    sendFile(radio,FILENAME)
+    sendFile(radio,filename)
 
     while not sendToken(radio):
         continue
