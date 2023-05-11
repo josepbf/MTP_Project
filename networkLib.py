@@ -141,7 +141,7 @@ def sendFile(radio,filename):
     If a TR timeouts, eliminate from tb so token is not passed to it.
     """
     global tb
-    file = readFile(filename)
+    file = readFile()
     timed_out = False
     for index, row in tb.iterrows():
         if row['File'] == 0:
