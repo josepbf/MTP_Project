@@ -66,10 +66,13 @@ def active():
             write_usb()
             led_manager(L1,On)
         #elif (GPIO.input(SW4)==True and GPIO.input(SW2)==True): #Nerwork Mode
-        elif (GPIO.input(SW2)==True): #NM
+        elif (GPIO.input(SW2)==True and GPIO.input(SW3)==True and GPIO.input(SW4)==True): #NM Transmitter
             led_manager(L1,Off)
-            #pensar interruptor primer transmisor
-            network_mode()
+            transmitter()
+            led_manager(L1,On)
+        elif (GPIO.input(SW2)==True and GPIO.input(SW3)==False and GPIO.input(SW4)==True): #NM Receiver
+            led_manager(L1,Off)
+            receiver()
             led_manager(L1,On)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==False): #Individual Mode Rx
             led_manager(L1,Off)
