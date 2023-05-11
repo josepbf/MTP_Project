@@ -64,9 +64,9 @@ def rx():
   try:
     while not eof :
         if(received_packets%60==0):
-          led_manager(L2,On)
+          led_manager(L3,On)
         elif(received_packets%30==0):
-          led_manager(L2,Off)
+          led_manager(L3,Off)
         if(GPIO.input(SW4)==False):
           return
         if radio.available():
@@ -123,9 +123,9 @@ def tx(payload):
   try:
     for i in range(len(payload)):
       if(i%60==0):
-        led_manager(L2,On)
+        led_manager(L3,On)
       elif(i%30==0):
-        led_manager(L2,Off)
+        led_manager(L3,Off)
       
       message = struct.pack("<B31s",seq_num,payload[i])
       ok = False
