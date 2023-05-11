@@ -195,7 +195,7 @@ def rx_mode():
     radioSetupRX()
     filename_bytes = rx()
     print(filename_bytes)
-    sleep(0.1)
+    sleep(2)
     reception = rx()
     if(GPIO.input(SW4)==False):
           radioPowerOff()
@@ -203,10 +203,11 @@ def rx_mode():
           led_manager(L3,Off)
           return
     number_of_fragments = int.from_bytes(reception[1], byteorder='big')
-    sleep(0.1)
+    sleep(2)
 
     for i in range(number_of_fragments):
         reception = rx()
+        sleep(2)
         #encendre leds en funció del valor de "reception[0]"
         if(GPIO.input(SW4)==False):
           break
@@ -217,7 +218,7 @@ def rx_mode():
             print("NOT OK")
             #encendre un altre led
         write(reception[1])
-        sleep(0.1)
+        #sleep(0.5)
     led_manager(L2,On)    
     
     radioPowerOff()
