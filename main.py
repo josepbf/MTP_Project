@@ -3,7 +3,7 @@ from functions import *
 from pyrf24 import RF24
 from time import sleep
 import os
-from networkLib import*
+from networkLib import *
 
 radio = RF24(22, 0)
 filename = ''
