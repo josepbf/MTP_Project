@@ -19,7 +19,7 @@ def initializeRadio():
         raise OSError("nRF24L01 hardware isn't responding")
     return radio
 
-def readFile(file_data): #TODO Read file from usb, particular for each team
+def readFile(): #TODO Read file from usb, particular for each team
     """
     Read file from usb.
     Return the file in bytes
@@ -36,6 +36,7 @@ def readFile(file_data): #TODO Read file from usb, particular for each team
         continue
     with open(file, 'rb') as transmittedFile:
         file_data = transmittedFile.read()
+    os.system('sudo umount /media/rpi/USB')
     return file_data
 
 def saveFile(file_data): #TODO Save file in usb, particular for each team
