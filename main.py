@@ -191,18 +191,10 @@ def rx_mode():
     global filename_bytes
     os.system('sudo rm /home/rpi/textfile/file.txt')
     led_manager(L3,On)
-    #AQUI cridar les funcions necesaries per a executar el rx mode
-    #radio = RF24(22, 0)
-
-    #if not radio.begin():
-    #    raise OSError("nRF24L01 hardware isn't responding")
-    #radio_setup(12345, True)
     radioSetupRX()
-
     filename_bytes = rx()
     print(filename_bytes)
     sleep(0.1)
-
     reception = rx()
     if(GPIO.input(SW4)==False):
           radioPowerOff()
