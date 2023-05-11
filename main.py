@@ -130,7 +130,7 @@ def network_mode():
     led_manager(L3,On)
     led_manager(L5,On)
     #AQUI cridar les funcions necesaries per a executar el network mode
-    elif (GPIO.input(SW3)==True and GPIO.input(SW4)==True): #NM
+    if (GPIO.input(SW3)==True and GPIO.input(SW4)==True): #NM
         transmitter()#NM
     else:#NM
         receiver()#NM
