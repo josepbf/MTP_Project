@@ -76,10 +76,10 @@ def transmitter():
     filename = readFile()
     
     sendFile(radio,filename)
-        if not tb.empty:
-            while not sendToken(radio):
-                continue
-            tokenpassed = True
+    if not tb.empty:
+        while not sendToken(radio):
+            continue
+        tokenpassed = True
 
     del radio
     time.sleep(0.5)
