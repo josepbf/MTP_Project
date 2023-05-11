@@ -67,12 +67,16 @@ def active():
             led_manager(L1,On)
         elif (GPIO.input(SW2)==True and GPIO.input(SW3)==True and GPIO.input(SW4)==True): #NM Transmitter
             led_manager(L1,Off)
+            led_manager(L3,On)
             transmitter()
             led_manager(L1,On)
+            led_manager(L3,Off)
         elif (GPIO.input(SW2)==True and GPIO.input(SW3)==False and GPIO.input(SW4)==True): #NM Receiver
             led_manager(L1,Off)
+            led_manager(L3,On)
             receiver()
             led_manager(L1,On)
+            led_manager(L3,Off)
         elif (GPIO.input(SW4)==True and GPIO.input(SW2)==False and GPIO.input(SW3)==False): #Individual Mode Rx
             led_manager(L1,Off)
             rx_mode()
