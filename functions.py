@@ -33,10 +33,10 @@ def radioSetupRX():
       raise OSError("nRF24L01 hardware isn't responding")
   radio.setPALevel(2,1)
   radio.openReadingPipe(0,12345)
-  radio.channel = 50
+  radio.channel = 22
   radio.listen = True
   radio.print_pretty_details()
-  radio.setDataRate(rf24.RF24_1MBPS)
+  radio.setDataRate(rf24.RF24_250KBPS)
   radio.setAutoAck(True)
 
 def radioSetupTX():
@@ -45,11 +45,11 @@ def radioSetupTX():
   radio.setPALevel(2,1)
   radio.setRetries(2,15)
   radio.openWritingPipe(12345)
-  radio.channel = 50
+  radio.channel = 22
   radio.listen = False
   radio.setPayloadSize(struct.calcsize("<B31s"))
   radio.print_pretty_details()
-  radio.setDataRate(rf24.RF24_1MBPS)
+  radio.setDataRate(rf24.RF24_250KBPS)
   radio.setAutoAck(True)
 
 def radioPowerOff():
