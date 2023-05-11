@@ -11,7 +11,7 @@ NODE_C2 = b'63926'
 OWN_ADDRESS = NODE_C1 #TODO Change to each address of each team TR
 
 #Filename TODO: Change for each team
-FILENAME = 'transmittedFile.txt' 
+FILENAME = '/media/' 
 
 def initializeRadio():
     radio = RF24()
@@ -19,12 +19,22 @@ def initializeRadio():
         raise OSError("nRF24L01 hardware isn't responding")
     return radio
 
-def readFile(fileName): #TODO Read file from usb, particular for each team
+def readFile(file_data): #TODO Read file from usb, particular for each team
     """
     Read file from usb.
     Return the file in bytes
     """
-    with open("transmittedFile.txt", 'rb') as transmittedFile:
+    if os.path.exists('/dev/sda1'):
+        os.system('sudo mount /dev/sda1 /media/rpi/USB')
+    elif os.path.exists('/dev/sdb1'):
+        os.system('sudo mount /dev/sdb1 /media/rpi/USB')
+    elif os.path.exists('/dev/sdc1'):
+        os.system('sudo mount /dev/sdc1 /media/rpi/USB')
+    elif os.path.exists('/dev/sdd1'):
+        os.system('sudo mount /dev/sdd1 /media/rpi/USB')
+    for file in glob("/media/rpi/USB/*.txt"):
+        continue
+    with open(file, 'rb') as transmittedFile:
         file_data = transmittedFile.read()
     return file_data
 
@@ -33,5 +43,13 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
     Gets file in bytes.
     Save file in usb.
     """
+    if os.path.exists('/dev/sda1'):
+        os.system('sudo mount /dev/sda1 /media/rpi/USB')
+    elif os.path.exists('/dev/sdb1'):
+        os.system('sudo mount /dev/sdb1 /media/rpi/USB')
+    elif os.path.exists('/dev/sdc1'):
+        os.system('sudo mount /dev/sdc1 /media/rpi/USB')
+    elif os.path.exists('/dev/sdd1'):
+        os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     with open('transmittedFile.txt','wb') as transmittedFile:
         transmittedFile.write(file_data)
