@@ -43,7 +43,7 @@ def radioSetupTX():
   if not radio.begin():
       raise OSError("nRF24L01 hardware isn't responding")
   radio.setPALevel(2,1)
-  radio.setRetries(2,15)
+  radio.setRetries(10,15)
   radio.openWritingPipe(12345)
   radio.channel = 22
   radio.listen = False
