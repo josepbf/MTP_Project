@@ -36,7 +36,7 @@ def readFile(): #TODO Read file from usb, particular for each team
         continue
     with open(file, 'rb') as transmittedFile:
         file_data = transmittedFile.read()
-    #os.system('sudo umount /media/rpi/USB')
+    os.system('sudo umount /media/rpi/USB')
     return file_data
 
 def saveFile(file_data): #TODO Save file in usb, particular for each team
@@ -54,4 +54,4 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     with open('/media/rpi/USB/transmittedFile.txt','wb') as file:
         file.write(file_data)
-    #os.system('sudo umount /media/rpi/USB')
+    os.system('sudo umount /media/rpi/USB')
