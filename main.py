@@ -183,8 +183,6 @@ def tx_mode(filename, compressed_bytes_batches):
     #        #encendre un altre led
         sleep(0.1)
     led_manager(L2,On)
-
-        
       
     radioPowerOff()
     
@@ -201,19 +199,19 @@ def rx_mode():
     radioSetupRX()
     filename_bytes = rx()
     print(filename_bytes)
-    sleep(2)
+    sleep(0.5)
     reception = rx()
+    sleep(0.5)
     if(GPIO.input(SW4)==False):
           radioPowerOff()
           led_manager(L2,Off)
           led_manager(L3,Off)
           return
     number_of_fragments = int.from_bytes(reception[1], byteorder='big')
-    sleep(2)
 
     for i in range(number_of_fragments):
         reception = rx()
-        sleep(2)
+        sleep(0.5)
         #encendre leds en funció del valor de "reception[0]"
         if(GPIO.input(SW4)==False):
           break
