@@ -12,6 +12,7 @@ NODE_C2 = b'63926'
 
 OWN_ADDRESS = NODE_C1 #TODO Change to each address of each team TR
 
+FILENAME = 'transmitterfile.txt'
 
 def initializeRadio():
     radio = RF24()
