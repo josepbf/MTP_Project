@@ -6,7 +6,7 @@ import struct
 from pyrf24 import RF24, rf24
 import shutil
 import RPi.GPIO as GPIO #importem la llibreria correpsonent
-from networkLib import *#NM
+#from networkLib import *#NM
 
 
 EOF = b'\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF' 
