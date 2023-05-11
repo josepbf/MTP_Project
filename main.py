@@ -175,6 +175,7 @@ def tx_mode(filename, compressed_bytes_batches):
         elif not ok:
             print("NOT OK")
     #        #encendre un altre led
+        sleep(0.1)
     led_manager(L2,On)
 
         
