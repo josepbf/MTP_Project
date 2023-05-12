@@ -3,7 +3,7 @@ from networkLib import *
 import os
 from glob import glob
 import RPi.GPIO as GPIO #importem la llibreria corresponent
-from functions import *
+#from functions import *
 
 L3=27  #GREEN
 GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
@@ -63,3 +63,9 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
         file.write(file_data)
         led_manager(L3,On)
     os.system('sudo umount /media/rpi/USB')
+    
+ def led_manager(led, estat): #funció per a operar els leds, es donen com a inputs el led i l'estat del led (On/Off) per a fer el funcionament d'aquests
+  if(estat):
+    GPIO.output(led, GPIO.HIGH) #obrir el led
+  else:
+    GPIO.output(led, GPIO.LOW) #tencar el led
