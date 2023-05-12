@@ -5,7 +5,7 @@ import bz2
 import struct
 from pyrf24 import RF24, rf24
 import shutil
-import RPi.GPIO as GPIO #importem la llibreria correpsonent
+import RPi.GPIO as GPIO #importem la llibreria corresponent
 from networkLib import *#NM
 
 
@@ -16,9 +16,9 @@ EOF2 = (1, b'\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xF
 
 GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
 SW4=21 #Stop/Go
-L3=27  #GREEN, tx if L2 & L3 NM
+L2=3  #YELLOW
 GPIO.setup(SW4, GPIO.IN)
-GPIO.setup(L3, GPIO.OUT)
+GPIO.setup(L2, GPIO.OUT)
 On=True
 Off=False
 
@@ -260,16 +260,16 @@ def write_on_pen(data):                         #obtenció del path fins al pend
 
 
         #controlador pels leds
-import RPi.GPIO as GPIO  #importem la llibreria correpsonent
+#import RPi.GPIO as GPIO  #importem la llibreria correpsonent
 
-GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
+#GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
 
 #Definim constants per a referirnos als Leds de una manera més senzilla
-L1=2
-L2=3
-L3=27
-L4=24
-L5=23
+#L1=2
+#L2=3
+#L3=27
+#L4=24
+#L5=23
 
 #establim els pins conectats als leds com a outputs
 #GPIO.setup(L1, GPIO.OUT)
