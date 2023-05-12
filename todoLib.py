@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO #importem la llibreria corresponent
 from functions import *
 
 L3=27  #GREEN
+GPIO.setup(L3, GPIO.OUT)
 On=True
 
 NODE_A1 = b'75369'
