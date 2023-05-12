@@ -3,6 +3,11 @@ import pandas as pd
 import time
 import logging
 from todoLib import *
+from functions import led_manager
+
+L2=3  #YELLOW
+On=True
+Off=False
 
 logging.basicConfig( encoding='utf-8', level=logging.DEBUG,format='[%(asctime)s] %(message)s')
 
@@ -49,6 +54,7 @@ def transmitter():
     Calls sendFile()
     Calls sendToken()
     """
+    led_manager(L2,On)
     
     global file, token
     
@@ -83,6 +89,7 @@ def transmitter():
 
     del radio
     time.sleep(0.5)
+    led_manager(L2,Off)
     receiver()
     
     
