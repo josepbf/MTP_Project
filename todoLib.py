@@ -52,6 +52,6 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
         os.system('sudo mount /dev/sdc1 /media/rpi/USB')
     elif os.path.exists('/dev/sdd1'):
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
-    with open('/media/rpi/USB/MTP-S23-NM-TX.txt','wb') as file:
+    with open('/media/rpi/USB/MTP-S23-NM-RX.txt','wb') as file:
         file.write(file_data)
     os.system('sudo umount /media/rpi/USB')
