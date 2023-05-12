@@ -2,6 +2,7 @@ from pyrf24 import RF24, rf24
 from networkLib import *
 import os
 from glob import glob
+import RPi.GPIO as GPIO #importem la llibreria corresponent
 from functions import *
 
 L3=27  #GREEN
