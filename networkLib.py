@@ -4,7 +4,7 @@ import time
 import logging
 from todoLib import *
 import RPi.GPIO as GPIO #importem la llibreria corresponent
-€from functions import *
+#from functions import *
 
 L2=3  #YELLOW
 GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
