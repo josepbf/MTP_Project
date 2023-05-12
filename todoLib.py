@@ -64,7 +64,7 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
         led_manager(L3,On)
     os.system('sudo umount /media/rpi/USB')
     
- def led_manager(led, estat): #funció per a operar els leds, es donen com a inputs el led i l'estat del led (On/Off) per a fer el funcionament d'aquests
+def led_manager(led, estat): #funció per a operar els leds, es donen com a inputs el led i l'estat del led (On/Off) per a fer el funcionament d'aquests
     if(estat):
         GPIO.output(led, GPIO.HIGH) #obrir el led
     else:
