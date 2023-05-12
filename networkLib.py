@@ -7,6 +7,8 @@ import RPi.GPIO as GPIO #importem la llibreria corresponent
 from functions import *
 
 L2=3  #YELLOW
+#GPIO.setup(SW4, GPIO.IN)
+GPIO.setup(L2, GPIO.OUT)
 On=True
 Off=False
 
