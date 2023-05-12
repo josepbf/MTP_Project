@@ -58,5 +58,5 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     with open('/media/rpi/USB/MTP-S23-NM-RX.txt','wb') as file:
         file.write(file_data)
-        led_manager(L3,ON)
+        led_manager(L3,On)
     os.system('sudo umount /media/rpi/USB')
