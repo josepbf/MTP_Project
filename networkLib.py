@@ -385,8 +385,3 @@ def receiveToken(radio):
     logging.debug('Token received. Switching to transmitter mode.')
     transmitter()
     
-def led_manager(led, estat): #funció per a operar els leds, es donen com a inputs el led i l'estat del led (On/Off) per a fer el funcionament d'aquests
-  if(estat):
-    GPIO.output(led, GPIO.HIGH) #obrir el led
-  else:
-    GPIO.output(led, GPIO.LOW) #tencar el led
