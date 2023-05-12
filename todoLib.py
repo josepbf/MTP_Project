@@ -63,7 +63,7 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
     shutil.copy("/home/rpi/textfile/MTP-S23-NM-RX.txt", "/media/rpi/USB/")
     with open('/media/rpi/USB/MTP-S23-NM-RX.txt','wb') as file:
         file.write(file_data)
-        led_manager(L3,On)
+        #led_manager(L3,On)
     os.system('sudo umount /media/rpi/USB')
     
 #def led_manager(led, estat): #funció per a operar els leds, es donen com a inputs el led i l'estat del led (On/Off) per a fer el funcionament d'aquests
