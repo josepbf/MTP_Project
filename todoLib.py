@@ -3,7 +3,7 @@ from networkLib import *
 import os
 from glob import glob
 #import RPi.GPIO as GPIO #importem la llibreria corresponent
-import shutil
+#import shutil
 
 
 #L3=27  #GREEN
@@ -60,7 +60,7 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
         os.system('sudo mount /dev/sdc1 /media/rpi/USB')
     elif os.path.exists('/dev/sdd1'):
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
-    shutil.copy("/home/rpi/textfile/MTP-S23-NM-RX.txt", "/media/rpi/USB/")
+    #shutil.copy("/home/rpi/textfile/MTP-S23-NM-RX.txt", "/media/rpi/USB/")
     with open('/media/rpi/USB/MTP-S23-NM-RX.txt','wb') as file:
         file.write(file_data)
         #led_manager(L3,On)
