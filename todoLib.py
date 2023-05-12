@@ -2,6 +2,10 @@ from pyrf24 import RF24, rf24
 from networkLib import *
 import os
 from glob import glob
+from functions import led_manager
+
+L3=27  #GREEN
+On=True
 
 NODE_A1 = b'75369'
 NODE_A2 = b'02736'
@@ -54,4 +58,5 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     with open('/media/rpi/USB/MTP-S23-NM-RX.txt','wb') as file:
         file.write(file_data)
+        led_manager(L3,ON)
     os.system('sudo umount /media/rpi/USB')
