@@ -18,7 +18,7 @@ SW3=26 #Rx/Tx
 SW4=21 #Stop/Go
 SW5=20 #-/ReadUSB
 SW6=16 #-/WriteUSB
-SW7=12 
+SW7=12 #-/Reboot Raspi
 
 GPIO.setup(SW1, GPIO.IN)
 GPIO.setup(SW2, GPIO.IN)
@@ -28,13 +28,12 @@ GPIO.setup(SW5, GPIO.IN)
 GPIO.setup(SW6, GPIO.IN)
 GPIO.setup(SW7, GPIO.IN)
 
-
 #LED Pinout definition & Setup
-L1=2   #RED, active
-L2=3   #YELLOW, rx if L2 & L3 NM
-L3=27  #GREEN, tx if L2 & L3 NM
-L4=24  #BLUE, read or write usb
-L5=23  #BLUE, Network Mode
+L1=2   #RED
+L2=3   #YELLOW
+L3=27  #GREEN
+L4=24  #BLUE
+L5=23  #BLUE
 
 GPIO.setup(L1, GPIO.OUT)
 GPIO.setup(L2, GPIO.OUT)
@@ -67,14 +66,14 @@ def active():
             led_manager(L1,On)
         elif (GPIO.input(SW2)==True and GPIO.input(SW3)==True and GPIO.input(SW4)==True): #NM Transmitter
             led_manager(L1,Off)
-            led_manager(L3,On)
+            led_manager(L5,On)
             transmitter()
             led_manager(L1,On)
             led_manager(L3,Off)
             led_manager(L5,Off)
         elif (GPIO.input(SW2)==True and GPIO.input(SW3)==False and GPIO.input(SW4)==True): #NM Receiver
             led_manager(L1,Off)
-            led_manager(L3,On)
+            led_manager(L5,On)
             receiver()
             led_manager(L1,On)
             led_manager(L3,Off)
@@ -102,13 +101,13 @@ def read_usb():
     if os.path.exists('/dev/sdd1'):
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     filename, compressed_bytes_batches = download_from_usb()
-    led_manager(L2,On)
+    led_manager(L3,On)
     os.system('sudo umount /media/rpi/USB')
     while (GPIO.input(SW5)==True):
         sleep(0.2)
         continue
     led_manager(L4,Off)
-    led_manager(L2,Off)
+    led_manager(L3,Off)
     return filename, compressed_bytes_batches
     
 
@@ -125,13 +124,13 @@ def write_usb():
     #AQUI cridar les funcions necesaries per a escriure al usb
     print(filename_bytes)
     upload_to_usb(filename_bytes[1])
-    led_manager(L2,On)
+    led_manager(L3,On)
     os.system('sudo umount /media/rpi/USB')
     while (GPIO.input(SW6)==True):
         sleep(0.2)
         continue
     led_manager(L4,Off)
-    led_manager(L2,Off)
+    led_manager(L3,Off)
 
 def network_mode():
     
@@ -151,7 +150,7 @@ def network_mode():
     led_manager(L5,Off)
 
 def tx_mode(filename, compressed_bytes_batches):
-    led_manager(L3,On)
+    #led_manager(L3,On)
     #AQUI cridar les funcions necesaries per a executar el tx mode
     #radio = RF24(22, 0)
 
@@ -182,7 +181,7 @@ def tx_mode(filename, compressed_bytes_batches):
             print("NOT OK")
     #        #encendre un altre led
         sleep(0.1)
-    led_manager(L2,On)
+    led_manager(L3,On)
       
     radioPowerOff()
     
@@ -195,7 +194,7 @@ def tx_mode(filename, compressed_bytes_batches):
 def rx_mode(): 
     global filename_bytes
     os.system('sudo rm /home/rpi/textfile/file.txt')
-    led_manager(L3,On)
+    #led_manager(L3,On)
     radioSetupRX()
     filename_bytes = rx()
     print(filename_bytes)
@@ -223,7 +222,7 @@ def rx_mode():
             #encendre un altre led
         write(reception[1])
         #sleep(0.5)
-    led_manager(L2,On)    
+    led_manager(L3,On)    
     
     radioPowerOff()
     
