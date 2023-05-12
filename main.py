@@ -122,8 +122,14 @@ def write_usb():
     if os.path.exists('/dev/sdd1'):
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     #AQUI cridar les funcions necesaries per a escriure al usb
-    print(filename_bytes)
-    upload_to_usb(filename_bytes[1])
+    try: filename_bytes
+    except NameError: filename_bytes = None
+    if filename_bytes is None:
+        print('MTP-S23-SRI-C-RX.txt')
+        upload_to_usb('MTP-S23-SRI-C-RX.txt')
+    else:
+        print(filename_bytes)
+        upload_to_usb(filename_bytes[1]) 
     led_manager(L3,On)
     os.system('sudo umount /media/rpi/USB')
     while (GPIO.input(SW6)==True):
