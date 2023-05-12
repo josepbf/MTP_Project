@@ -2,13 +2,13 @@ from pyrf24 import RF24, rf24
 from networkLib import *
 import os
 from glob import glob
-#import RPi.GPIO as GPIO #importem la llibreria corresponent
-#from functions import *
+import RPi.GPIO as GPIO #importem la llibreria corresponent
 
-#L3=27  #GREEN
-#GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
-#GPIO.setup(L3, GPIO.OUT)
-#On=True
+
+L3=27  #GREEN
+GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
+GPIO.setup(L3, GPIO.OUT)
+On=True
 
 NODE_A1 = b'75369'
 NODE_A2 = b'02736'
@@ -61,11 +61,11 @@ def saveFile(file_data): #TODO Save file in usb, particular for each team
         os.system('sudo mount /dev/sdd1 /media/rpi/USB')
     with open('/media/rpi/USB/MTP-S23-NM-RX.txt','wb') as file:
         file.write(file_data)
-#        led_manager(L3,On)
+        led_manager(L3,On)
     os.system('sudo umount /media/rpi/USB')
     
-#def led_manager(led, estat): #funció per a operar els leds, es donen com a inputs el led i l'estat del led (On/Off) per a fer el funcionament d'aquests
-#    if(estat):
-#        GPIO.output(led, GPIO.HIGH) #obrir el led
-#    else:
-#        GPIO.output(led, GPIO.LOW) #tencar el led
+def led_manager(led, estat): #funció per a operar els leds, es donen com a inputs el led i l'estat del led (On/Off) per a fer el funcionament d'aquests
+    if(estat):
+        GPIO.output(led, GPIO.HIGH) #obrir el led
+    else:
+        GPIO.output(led, GPIO.LOW) #tencar el led
