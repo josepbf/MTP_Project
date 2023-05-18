@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO #importem la llibreria corresponent
 from functions import *
 
 L2=3  #YELLOW
+SW4=21 #Stop/Go
 GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
 GPIO.setup(SW4, GPIO.IN)
 GPIO.setup(L2, GPIO.OUT)
