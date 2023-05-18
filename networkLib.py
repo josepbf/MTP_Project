@@ -3,15 +3,15 @@ import pandas as pd
 import time
 import logging
 from todoLib import *
-#import RPi.GPIO as GPIO #importem la llibreria corresponent
-#from functions import *
+import RPi.GPIO as GPIO #importem la llibreria corresponent
+from functions import *
 
-#L2=3  #YELLOW
-#GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
-#GPIO.setup(SW4, GPIO.IN)
-#GPIO.setup(L2, GPIO.OUT)
-#On=True
-#Off=False
+L2=3  #YELLOW
+GPIO.setmode(GPIO.BCM) #establim com es fara referencia als pins de la RPi
+GPIO.setup(SW4, GPIO.IN)
+GPIO.setup(L2, GPIO.OUT)
+On=True
+Off=False
 
 logging.basicConfig( encoding='utf-8', level=logging.DEBUG,format='[%(asctime)s] %(message)s')
 
@@ -58,7 +58,7 @@ def transmitter():
     Calls sendFile()
     Calls sendToken()
     """
-    #led_manager(L2,On)
+    led_manager(L2,On)
     
     global file, token
     
@@ -93,7 +93,7 @@ def transmitter():
 
     del radio
     time.sleep(0.5)
-    #led_manager(L2,Off)
+    led_manager(L2,Off)
     receiver()
     
     
